@@ -1,5 +1,17 @@
 ## RAG Q&A Conversation With PDF Including Chat History
+import sys
+
+# Patch for old SQLite on Streamlit Cloud
+try:
+    __import__("pysqlite3")
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
+
 import streamlit as st
+from langchain_chroma import Chroma
+
+#import streamlit as st
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_chroma import Chroma
@@ -15,17 +27,6 @@ import os
 
 from dotenv import load_dotenv
 load_dotenv()
-import sys
-
-# Patch for old SQLite on Streamlit Cloud
-try:
-    __import__("pysqlite3")
-    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
-except ImportError:
-    pass
-
-import streamlit as st
-from langchain_chroma import Chroma
 
 #os.environ['HF_TOKEN'] = os.getenv("HF_TOKEN")
 hf_token = st.text_input("Enter your Hugging Face token:", type="password")
