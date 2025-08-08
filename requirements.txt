@@ -4,6 +4,10 @@ langchain
 ipykernel
 python-dotenv
 langchain_community
+chromadb
+langchain-chroma
+duckdb
+pysqlite3-binary
 pypdf
 bs4
 arxiv
