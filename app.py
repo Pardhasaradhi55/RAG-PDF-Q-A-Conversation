@@ -16,7 +16,14 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-os.environ['HF_TOKEN'] = os.getenv("HF_TOKEN")
+#os.environ['HF_TOKEN'] = os.getenv("HF_TOKEN")
+hf_token = st.text_input("Enter your Hugging Face token:", type="password")
+if hf_token:
+    os.environ['HF_TOKEN'] = hf_token
+    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+else:
+    embeddings = None
+    st.warning("Please enter your Hugging Face token to use embeddings.")
 embeddings=HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 
