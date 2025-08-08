@@ -15,6 +15,17 @@ import os
 
 from dotenv import load_dotenv
 load_dotenv()
+import sys
+
+# Patch for old SQLite on Streamlit Cloud
+try:
+    __import__("pysqlite3")
+    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
+
+import streamlit as st
+from langchain_chroma import Chroma
 
 #os.environ['HF_TOKEN'] = os.getenv("HF_TOKEN")
 hf_token = st.text_input("Enter your Hugging Face token:", type="password")
@@ -132,6 +143,7 @@ if api_key:
             st.write("Chat History:", session_history.messages)
 else:
     st.warning("Please enter the GRoq API Key")
+
 
 
 
