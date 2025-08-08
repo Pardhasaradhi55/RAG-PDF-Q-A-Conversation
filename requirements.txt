@@ -55,4 +55,4 @@ unstructured
 pytube
 numexpr
 huggingface_hub
-chroma
+chromadb
